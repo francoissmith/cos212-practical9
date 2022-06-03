@@ -52,22 +52,30 @@ public class Sort {
 	/********** COUNTING **********/
 	public static void countingsort(int[] data, boolean debug) {
 		// Your code here
-		int n = data.length , largest = getLargest(data);
-		int[] tmp = new int[n];
-		int[] count = new int[largest + 1];
+		int n = data.length, lg = getLargest(data);
+		int[] temp = new int[n];
+		int[] count = new int[lg + 1];
 
-		for (int i = 0; i <= largest; i++)
+		for (int i = 0; i <= lg; i++) {
 			count[i] = 0;
-		for (int i = 0; i < n; i++)
+		}
+
+		for (int i = 0; i < n; i++) {
 			count[data[i]]++;
-		for (int i = 1; i <= largest; i++)
+		}
+
+		for (int i = 1; i < lg + 1; i++) {
 			count[i] = count[i - 1] + count[i];
+		}
+
 		for (int i = n - 1; i >= 0; i--) {
-			tmp[count[data[i]] - 1] = data[i];
+			temp[count[data[i]] - 1] = data[i];
 			count[data[i]]--;
 		}
-		for (int i = 0; i < n; i++)
-			data[i] = tmp[i];
+
+		for (int i = 0; i < n; i++) {
+			data[i] = temp[i];
+		}
 
 		// DO NOT MOVE OR REMOVE!
 		if (debug)
